@@ -8,7 +8,7 @@ const Products = ({addItems}) => {
     return (
         <div className='space-y-4'>
             <h1 className='font-semibold text-xl'>Products</h1>
-            <div className='grid gap-4 md:grid-cols-4'>
+            <div className='grid flex justify-center gap-4 md:grid-cols-4'>
                 {PRODUCTS.map((product) => (
                     <div key={product.id} className='bg-white shadow-md w-64 rounded-lg space-y-4 p-4'>
                         <h1>{product.name}</h1>
