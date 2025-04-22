@@ -11,9 +11,11 @@ const Summary = ({ total,applyGift }) => {
         return acc
     }, 0)
 
-    useEffect(()=>{
-        if(sum>=THRESHOLD){
+    useEffect(()=>{        
+        if(sum>=THRESHOLD){            
             applyGift(FREE_GIFT)
+        }else{
+            applyGift(undefined)
         }
     },[sum])
 

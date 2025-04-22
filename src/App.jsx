@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import Products from './components/Products'
 import Summary from './components/Summary'
 import CartItems from './components/CartItems'
@@ -31,7 +31,7 @@ const App = () => {
         return prev
       })
       
-  }
+  }  
 
   const handleGift = (gift) => {
     setAddedGift(gift)
