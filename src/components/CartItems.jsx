@@ -1,11 +1,7 @@
-import React, { useEffect } from 'react'
+import React from 'react'
 import { PRODUCTS } from '../data'
 
 const CartItems = ({ items, handleQty, gift }) => {
-    const eligible = 
-    useEffect(()=>{
-
-    },[gift,])
     return (
         <div className='space-y-4'>
             <h1 className='font-semibold text-xl'>Cart Items</h1>

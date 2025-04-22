@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react'
+import React, { useState } from 'react'
 import Products from './components/Products'
 import Summary from './components/Summary'
 import CartItems from './components/CartItems'
@@ -40,7 +40,7 @@ const App = () => {
   return (
     <div className='min-h-screen bg-gray-100 p-6 space-y-4'>
         <h1 className='font-bold text-2xl text-center'>Shopping Cart</h1>
-        <Products addItems={handleItems}/>
+        <Products addItems={handleItems} cartItems={addedItems}/>
         <Summary total={addedItems} applyGift={handleGift}/>
         <CartItems items={addedItems} handleQty={quantity} gift={addedGift}/>
     </div>

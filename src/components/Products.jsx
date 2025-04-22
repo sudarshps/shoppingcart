@@ -1,21 +1,23 @@
-import React, { useState } from 'react'
+import React from 'react'
 import { PRODUCTS } from '../data'
 
-const Products = ({addItems}) => {
+const Products = ({addItems,cartItems}) => {
     const handleAddItem = (id) => {
         addItems(id)
-    }
+    }    
     return (
         <div className='space-y-4'>
             <h1 className='font-semibold text-xl'>Products</h1>
             <div className='grid flex justify-center gap-4 md:grid-cols-3 lg:grid-cols-4'>
-                {PRODUCTS.map((product) => (
+                {PRODUCTS.map((product) => {
+                    const addedProduct = cartItems.find((it)=>it.id===product.id)
+                    return(
                     <div key={product.id} className='bg-white shadow-md w-64 rounded-lg space-y-4 p-4'>
                         <h1>{product.name}</h1>
                         <h1>₹{product.price}</h1>
-                        <button onClick={()=>handleAddItem(product.id)} className='bg-blue-500 hover:cursor-pointer w-full text-white rounded-lg p-2'>Add to cart</button>
+                        {addedProduct?(<button onClick={()=>handleAddItem(product.id)} className='bg-blue-500 hover:cursor-pointer w-full text-white rounded-lg p-2 disabled:bg-gray-400' disabled>Added</button>):(<button onClick={()=>handleAddItem(product.id)} className='bg-blue-500 hover:cursor-pointer w-full text-white rounded-lg p-2'>Add to cart</button>)}
                     </div>
-                ))}
+                )})}
 
             </div>
         </div>
