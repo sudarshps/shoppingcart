@@ -5,18 +5,19 @@ import CartItems from './components/CartItems'
 
 const App = () => {
   const [addedItems,setAddedItems] = useState([])
+  const [addedGift,setAddedGift] = useState()
   const quantity = (method,id) => {
     setAddedItems(prev=>{
       return prev.map((it)=>{
         if(it.id === id){
           if(method === 'inc'){
             return{...it,qty:it.qty+1}
-          }else{
+          }else{            
             return{...it,qty:it.qty-1}
           }
         }
         return it
-      })
+      }).filter((it)=>it.qty>0)
       
     })
     
@@ -31,13 +32,17 @@ const App = () => {
       })
       
   }
+
+  const handleGift = (gift) => {
+    setAddedGift(gift)
+  }
   
   return (
     <div className='min-h-screen bg-gray-100 p-6 space-y-4'>
         <h1 className='font-bold text-2xl text-center'>Shopping Cart</h1>
         <Products addItems={handleItems}/>
-        <Summary total={addedItems}/>
-        <CartItems items={addedItems} handleQty={quantity}/>
+        <Summary total={addedItems} applyGift={handleGift}/>
+        <CartItems items={addedItems} handleQty={quantity} gift={addedGift}/>
     </div>
   )
 }

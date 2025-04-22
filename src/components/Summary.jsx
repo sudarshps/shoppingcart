@@ -1,7 +1,7 @@
-import React from 'react'
-import { PRODUCTS } from '../data'
+import React, { useEffect } from 'react'
+import { PRODUCTS, FREE_GIFT, THRESHOLD } from '../data'
 
-const Summary = ({ total }) => {
+const Summary = ({ total,applyGift }) => {
     const sum = PRODUCTS.reduce((acc, val) => {
         const exist = total.find((i) => i.id === val.id)
 
@@ -11,6 +11,13 @@ const Summary = ({ total }) => {
         return acc
     }, 0)
 
+    useEffect(()=>{
+        if(sum>=THRESHOLD){
+            applyGift(FREE_GIFT)
+        }
+    },[sum])
+
+    const progress = (sum / THRESHOLD) * 100
 
     return (
         <div className='space-y-4'>
@@ -21,12 +28,26 @@ const Summary = ({ total }) => {
                         <h1>Subtotal: </h1>
                     </div>
                     <div>
-                        {sum}
+                    ₹{sum}
                     </div>
                 </div>
                 <hr className='border' />
-                <div className='bg-gray-100 flex justify-center items-center rounded-lg'>
-                    <h1>Add 0 more to get free wireless mouse!</h1>
+                <div className='bg-blue-50 h-16 flex flex-col px-4 justify-center rounded-lg'>
+                    {sum >= THRESHOLD ? (
+                        <>
+                            <h1>You got a free mouse!</h1>
+                        </>
+                    ) : (
+                        <>
+                            <h1>Add ₹{THRESHOLD - sum} more to get free wireless mouse!</h1>
+                            <div className='w-full bg-gray-200 h-4 rounded-xl'>
+                                <div className='bg-blue-500 h-full rounded-xl' style={{ width: `${progress}%` }}>
+
+                                </div>
+                            </div>
+                        </>
+
+                    )}
 
                 </div>
             </div>
